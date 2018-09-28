@@ -1,0 +1,97 @@
+Renesas Optimizing Linker (W2.08.00 )             28-Sep-2018 22:53:06
+
+*** Options ***
+
+-subcommand=DefaultBuild\Nami_test_1.clnk
+-library=DefaultBuild\Nami_test_1.lib
+-input=DefaultBuild\dbsct.obj
+-input=DefaultBuild\intprg.obj
+-input=DefaultBuild\Nami_test_1.obj
+-input=DefaultBuild\resetprg.obj
+-input=DefaultBuild\sbrk.obj
+-input=DefaultBuild\vecttbl.obj
+-input=DefaultBuild\init_rx220.obj
+-input=DefaultBuild\function_test.obj
+-input=DefaultBuild\interrupt.obj
+-input=DefaultBuild\sci.obj
+-input=DefaultBuild\sensor.obj
+-input=DefaultBuild\drive.obj
+-input=DefaultBuild\switch.obj
+-input=DefaultBuild\buzzer.obj
+-input=DefaultBuild\mode.obj
+-input=DefaultBuild\calib.obj
+-input=DefaultBuild\run.obj
+-input=DefaultBuild\output.obj
+-input=DefaultBuild\camera.obj
+-noprelink
+-output=DefaultBuild\Nami_test_1.abs
+-list=DefaultBuild\Nami_test_1.map
+-nooptimize
+-start=B_1,R_1,B_2,R_2,B,R,SU,SI/04,PResetPRG/0FFFC0000,C_1,C_2,C,C$DSEC,C$BSEC,C$INIT,C$VTBL,C$VECT,D_1,D_2,D,P,PIntPRG,W_1,W_2,W,L/0FFFC0100,FIXEDVECT/0FFFFFFD0
+-rom=D=R,D_1=R_1,D_2=R_2
+-nologo
+-end
+
+*** Error information ***
+
+*** Mapping List ***
+
+SECTION                            START      END         SIZE   ALIGN
+B_1
+                                  00000004  00000004         0   1
+R_1
+                                  00000004  00000004         0   1
+B_2
+                                  00000004  00000105       102   2
+R_2
+                                  00000106  00000111         c   2
+B
+                                  00000114  00000cf7       be4   4
+R
+                                  00000cf8  00000d5f        68   4
+SU
+                                  00000d60  00000e5f       100   4
+SI
+                                  00000e60  0000115f       300   4
+PResetPRG
+                                  fffc0000  fffc0029        2a   1
+C_1
+                                  fffc0100  fffc0100         0   1
+C_2
+                                  fffc0100  fffc0121        22   2
+C
+                                  fffc0124  fffc0157        34   4
+C$DSEC
+                                  fffc0158  fffc017b        24   4
+C$BSEC
+                                  fffc017c  fffc0193        18   4
+C$INIT
+                                  fffc0194  fffc0194         0   1
+C$VTBL
+                                  fffc0194  fffc0194         0   1
+C$VECT
+                                  fffc0194  fffc0593       400   4
+D_1
+                                  fffc0594  fffc0594         0   1
+D_2
+                                  fffc0594  fffc059f         c   2
+D
+                                  fffc05a0  fffc0607        68   4
+P
+                                  fffc0608  fffc1ed9      18d2   1
+PIntPRG
+                                  fffc1eda  fffc1fea       111   1
+W_1
+                                  fffc1feb  fffc1ffe        14   1
+W_2
+                                  fffc2000  fffc2000         0   2
+W
+                                  fffc2000  fffc2000         0   4
+L
+                                  fffc2000  fffc20b4        b5   4
+$ADDR_C_FFFFFF80
+                                  ffffff80  ffffff83         4   1
+$ADDR_C_FFFFFFA0
+                                  ffffffa0  ffffffaf        10   1
+FIXEDVECT
+                                  ffffffd0  ffffffff        30   4
