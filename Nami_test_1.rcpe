@@ -64,6 +64,7 @@
           <Option>-include=.</Option>
           <Option>-output=obj</Option>
           <Option>-debug</Option>
+          <Option>-speed</Option>
           <Option>-nologo</Option>
           <Option>-Xcref=%BuildModeName%</Option>
         </CompileOptions>

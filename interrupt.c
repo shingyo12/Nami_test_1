@@ -5,7 +5,7 @@
 #include "mode.h"
 #include "camera.h"
 #include "run.h"
-#include "drive.h"
+//#include "drive.h"
 
 static unsigned short mtu3_cnt = 0;
 static unsigned int timer_ms = 0;
@@ -14,29 +14,86 @@ static unsigned int timer_sec = 0;
 
 
 void mtu3_tgra(){
-	mtu3_cnt ++;
-}
-
-void mtu3_tgrb(){
 	static short int j=0;
-	static short int clk=0,rokou=0;
+	long int k=0;
+
 	if(SW_MODE==SW_ON){
 		LED_1 = CHIP_LED_ON;
+		LED_2 = CHIP_LED_ON;
 		wait_sw_off();
 		j=j+1;
 		if(j>9)j=0;
 		LED_1 = CHIP_LED_OFF;
+		LED_2 = CHIP_LED_OFF;
+	}
+	mode(j);
+	seven_seg(j);
+	//line_scan();
+	//set_vel();
+	if(SW_START==SW_ON){
+		wait_sw_off();
+		//if(move > 0){
+			//move=0;
+			//LED_2 = CHIP_LED_ON;
+		//}else{
+			move=0;
+			LED_2 = CHIP_LED_OFF;
+			for(k=0;k<6000000;k++);
+			LED_2 = CHIP_LED_ON;
+			for(k=0;k<6000000;k++);
+			LED_2 = CHIP_LED_OFF;
+			for(k=0;k<6000000;k++);
+			LED_2 = CHIP_LED_ON;
+			for(k=0;k<6000000;k++);
+			LED_2 = CHIP_LED_OFF;
+			move=1;
+			LED_2 = CHIP_LED_ON;
+			
+		//}
+		distance = 0;
+	}
+}
+
+void mtu3_tgrb(){
+	/*static short int j=0;
+	long int k=0;
+
+	if(SW_MODE==SW_ON){
+		LED_1 = CHIP_LED_ON;
+		LED_2 = CHIP_LED_ON;
+		wait_sw_off();
+		j=j+1;
+		if(j>9)j=0;
+		LED_1 = CHIP_LED_OFF;
+		LED_2 = CHIP_LED_OFF;
 	}
 	mode(j);
 	seven_seg(j);
 	line_scan();
+	//set_vel();
 	if(SW_START==SW_ON){
-		LED_2 = CHIP_LED_ON;
 		wait_sw_off();
-		move ^= 1;
+		//if(move > 0){
+			//move=0;
+			//LED_2 = CHIP_LED_ON;
+		//}else{
+			move=0;
+			LED_2 = CHIP_LED_OFF;
+			for(k=0;k<6000000;k++);
+			LED_2 = CHIP_LED_ON;
+			for(k=0;k<6000000;k++);
+			LED_2 = CHIP_LED_OFF;
+			for(k=0;k<6000000;k++);
+			LED_2 = CHIP_LED_ON;
+			for(k=0;k<6000000;k++);
+			LED_2 = CHIP_LED_OFF;
+			move=1;
+			LED_2 = CHIP_LED_ON;
+			
+		//}
 		distance = 0;
-		LED_2 = CHIP_LED_OFF;
-	}
+	}*/
+	
 	/*if(clk >= 128){
 		rokou++;
 		if(rokou>5){
@@ -70,11 +127,17 @@ void mtu3_tgrb(){
 		CAM_CLK=0;
 		clk++;
 	}  */
-	encoder();
+	//encoder();
 }
 
 void mtu4_tgrb(){
-	
+	//set_vel();
+	/*static int mtu4_temp=0;
+	mtu4_temp ++;
+	if(mtu4_temp >= 100000){
+		LED_1 =~ LED_1;
+		mtu4_temp = 0;
+	}*/
 }
 void increment_timer_ms(){
 	timer_ms ++;

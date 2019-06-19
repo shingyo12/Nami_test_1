@@ -19,7 +19,7 @@ void init_calib(void){
 void calib(){
 	static int calib_cnt=0,j;
 
-	set_vel(0,0);
+	//set_vel(0,0);
 	
 	for(j=0;j<128;j++){
 		sum_cam[j] += cam[j];
@@ -27,7 +27,7 @@ void calib(){
 	calib_cnt++;
 	
 	if(distance>100){
-		set_vel(0,0);
+		//set_vel(0,0);
 		move=0;
 		for(j=0;j<128;j++){
 			ref_cam[j] = sum_cam[j]/calib_cnt;

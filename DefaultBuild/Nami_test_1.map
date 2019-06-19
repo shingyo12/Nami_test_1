@@ -1,4 +1,4 @@
-Renesas Optimizing Linker (W2.08.00 )             28-Sep-2018 22:53:06
+Renesas Optimizing Linker (W2.08.00 )             25-Feb-2019 22:39:01
 
 *** Options ***
 
@@ -42,17 +42,17 @@ B_1
 R_1
                                   00000004  00000004         0   1
 B_2
-                                  00000004  00000105       102   2
+                                  00000004  00000103       100   2
 R_2
-                                  00000106  00000111         c   2
+                                  00000104  0000010f         c   2
 B
-                                  00000114  00000cf7       be4   4
+                                  00000110  00001113      1004   4
 R
-                                  00000cf8  00000d5f        68   4
+                                  00001114  0000114b        38   4
 SU
-                                  00000d60  00000e5f       100   4
+                                  0000114c  0000124b       100   4
 SI
-                                  00000e60  0000115f       300   4
+                                  0000124c  0000154b       300   4
 PResetPRG
                                   fffc0000  fffc0029        2a   1
 C_1
@@ -76,19 +76,19 @@ D_1
 D_2
                                   fffc0594  fffc059f         c   2
 D
-                                  fffc05a0  fffc0607        68   4
+                                  fffc05a0  fffc05d7        38   4
 P
-                                  fffc0608  fffc1ed9      18d2   1
+                                  fffc05d8  fffc24ff      1f28   1
 PIntPRG
-                                  fffc1eda  fffc1fea       111   1
+                                  fffc2500  fffc2610       111   1
 W_1
-                                  fffc1feb  fffc1ffe        14   1
+                                  fffc2611  fffc2650        40   1
 W_2
-                                  fffc2000  fffc2000         0   2
+                                  fffc2652  fffc2665        14   2
 W
-                                  fffc2000  fffc2000         0   4
+                                  fffc2668  fffc2668         0   4
 L
-                                  fffc2000  fffc20b4        b5   4
+                                  fffc2668  fffc2713        ac   4
 $ADDR_C_FFFFFF80
                                   ffffff80  ffffff83         4   1
 $ADDR_C_FFFFFFA0

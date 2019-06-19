@@ -7,37 +7,41 @@
 #include "output.h"
 #include "mode.h"
 
+long int goal=0;
+
 void mode(int num){
 	switch(num){
 		case 0:
-			calib();
+			camera_calib2();
 			break;
 		case 1:
-			memorize();
+			line_scan2(10);
 			break;
 		case 2:
-			mem_run(0.4);
+			line_scan2(15);
 			break;
 		case 3:
-			mem_run(0.7);
+			line_scan2(20);
 			break;
 		case 4:
-			mem_run(1);
+			line_scan2(15);
+			goal++;
+			if(goal>500000)move=0;
 			break;
 		case 5:
-			run(0.5);
+			line_scan3(15);
 			break;
 		case 6:
-			run(1);
+			line_scan3(20);
 			break;
 		case 7:
-			run_mcr(0.5);
+
 			break;
 		case 8:
-			run_mcr(1);
+
 			break;
 		case 9:
-			output_data();
+			sci_printf("enc l:%d r:%d \r\n",l_encoder(),r_encoder());
 			break;
 	}
 }

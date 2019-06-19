@@ -77,10 +77,13 @@ void init_rx220(void){
 	MTU1.TMDR.BIT.MD = 0x4;	//MTCLK mode1
 	MTU2.TMDR.BIT.MD = 0x4;	//MTCLK mode1
 	
-	MTU3.TCR.BIT.TPSC = 0x1;	//PCLK/16
+	MTU3.TCR.BIT.TPSC = 0x2;	//PCLK/16
+	//MTU3.TCR.BIT.TPSC = 2;
 	MTU3.TCR.BIT.CCLR = 0x2;	//Clear TGRB compare match
-	MTU3.TGRA = (204-1);		//102us
-	MTU3.TGRB = (250-1);		//125us interrupt period
+	//MTU3.TCR.BIT.CCLR = 0x1;	//Clear TGRA compare match
+	MTU3.TGRA = (204-1);		//204 102us
+	MTU3.TGRB = (250-1);		//250 125us interrupt period
+	//MTU3.TGRB = 32*1000/16-1;
 	//MTU3.TGRB = 50000-1;
 	MTU3.TIER.BIT.TGIEA = 1;	//Enable interrupt from TGIA
 	MTU3.TIER.BIT.TGIEB = 1;	//Enable interrupt from TGIB

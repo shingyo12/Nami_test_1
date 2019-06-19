@@ -99,13 +99,6 @@ void seven_seg(int n){
 	}
 }
 
-void motor_drive_test(){
-	MOT_STBY = 1;			//Standby off
-	direction_r_mot(MOT_FORWARD);	//R motor forward
-	direction_l_mot(MOT_FORWARD);	//L motor forward
-	
-}
-
 void flash_led(void){
 	short i=0;
 	while(1){	

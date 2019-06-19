@@ -1,6 +1,6 @@
 ****buzzer.c
 v2 
-:1537708629
+:1538162604
 #1
 F "_builtin_max" - I!1 T!2 ?24-2 P!3 P!4 
 T "long" KBS I!2 0x4 
@@ -4847,17 +4847,17 @@ V "time" - I!4850 O!128 T!31 !32-1 35-1 .2 0x2
 F "wait_ms" - I!4851 T!4839 35-1 
 ****%CxSystemPath%\include\builtin.h
 v2 
-:1537708629
+:1538162604
 #2
 ****%CxSystemPath%\include\macro.h
 v2 
-:1537708629
+:1538162604
 #3
 ****buzzer.h
 v2 
-:1537708629
+:1538162604
 #4
 ****iodefine.h
 v2 
-:1537708629
+:1538162604
 #5
