@@ -41,3 +41,7 @@ void calib(){
 		sci_printf("\r\n");
 	}
 }
+
+void debug(){
+	
+}

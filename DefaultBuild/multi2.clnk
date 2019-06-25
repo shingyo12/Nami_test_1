@@ -18,6 +18,7 @@
 -input=DefaultBuild\run.obj
 -input=DefaultBuild\output.obj
 -input=DefaultBuild\camera.obj
+-input=DefaultBuild\trace.obj
 -noprelink
 -output=DefaultBuild\multi2.abs
 -list=DefaultBuild\multi2.map

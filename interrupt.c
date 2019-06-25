@@ -5,6 +5,7 @@
 #include "mode.h"
 #include "camera.h"
 #include "run.h"
+#include "buzzer.h"
 //#include "drive.h"
 
 static unsigned short mtu3_cnt = 0;
@@ -38,14 +39,19 @@ void mtu3_tgra(){
 		//}else{
 			move=0;
 			LED_2 = CHIP_LED_OFF;
+			BUZZ_OUT = 0;
 			for(k=0;k<6000000;k++);
+			BUZZ_OUT = 1;
 			LED_2 = CHIP_LED_ON;
 			for(k=0;k<6000000;k++);
 			LED_2 = CHIP_LED_OFF;
+			BUZZ_OUT = 0;
 			for(k=0;k<6000000;k++);
+			BUZZ_OUT = 1;
 			LED_2 = CHIP_LED_ON;
 			for(k=0;k<6000000;k++);
 			LED_2 = CHIP_LED_OFF;
+			BUZZ_OUT = 0;
 			move=1;
 			LED_2 = CHIP_LED_ON;
 			

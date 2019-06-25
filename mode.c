@@ -6,6 +6,7 @@
 #include "run.h"
 #include "output.h"
 #include "mode.h"
+#include "trace.h"
 
 long int goal=0;
 

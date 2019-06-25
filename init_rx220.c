@@ -32,6 +32,12 @@ void init_rx220(void){
 	//PORTH.PDR.BIT.B0 = 0;		//PORTH bit0: Output cammera
 	//PORTH.PDR.BIT.B1 = 0;		//PORTH bit1: Output cammera
 	
+	PORT4.PDR.BIT.B0 = 0;		//PORTB bit0: Input encoder
+	PORT4.PDR.BIT.B1 = 0;		//PORTB bit1: Input encoder
+	PORT4.PDR.BIT.B5 = 0;		//PORTB bit5: Input encoder
+	PORT4.PDR.BIT.B6 = 0;		//PORTB bit6: Input encoder
+	PORT4.PDR.BIT.B3 = 1;		//PORTB bit3: Output speaker
+	
 	PORTE.PODR.BYTE = 0x00;		//PORTE bit1,4,5: Low
 	PORT5.PODR.BYTE = 0x00;		//PORT5 bit4,5: Low
 	PORT1.PODR.BYTE = 0x00;		//PORT1 bit4,5,6,7: Low
@@ -53,12 +59,7 @@ void init_rx220(void){
 	PORTE.PMR.BIT.B1 = 1; 		//PORTE bit1: MTIOC4C
 	PORTE.PMR.BIT.B2 = 1; 		//PORTE bit2: MTIOC4A
 	
-	PORTA.PMR.BIT.B1 = 1;		//PORTA bit1: MTIOC4A
-	PORTA.PMR.BIT.B3 = 1;		//PORTA bit3: MTIOC4A
-	PORTA.PMR.BIT.B4 = 1;		//PORTA bit4: MTIOC4A
-	PORTA.PMR.BIT.B6 = 1;		//PORTA bit6: MTIOC4A
-	
-	PORTB.PMR.BIT.B3 = 1;		//spk
+	PORTB.PMR.BIT.B3 = 0;		//spk
 	
 	//MPC setting
 	MPC.PWPR.BIT.B0WI = 0;
