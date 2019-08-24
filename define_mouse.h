@@ -25,6 +25,7 @@
 #define CHIP_LED_OFF 1
 
 #define SW_MODE		PORT4.PIDR.BIT.B6
+#define SW_RESET	PORT4.PIDR.BIT.B1
 #define SW_START	PORT4.PIDR.BIT.B4
 
 #define CAM_CLK		PORTH.PODR.BIT.B0
@@ -41,7 +42,7 @@
 #define KP 1
 #define KD 1
 
-#define R_ENC 		MTU1.TCNT
+#define R_ENC 		-1*MTU1.TCNT
 #define L_ENC 		MTU2.TCNT
 
 #define PI 3.1415926535

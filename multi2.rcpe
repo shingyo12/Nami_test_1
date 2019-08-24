@@ -26,8 +26,6 @@
       <Path>interrupt.h</Path>
       <Path>sci.c</Path>
       <Path>sci.h</Path>
-      <Path>sensor.c</Path>
-      <Path>sensor.h</Path>
       <Path>drive.c</Path>
       <Path>drive.h</Path>
       <Path>define_mouse.h</Path>
@@ -45,6 +43,8 @@
       <Path>output.h</Path>
       <Path>camera.c</Path>
       <Path>camera.h</Path>
+      <Path>trace.c</Path>
+      <Path>trace.h</Path>
     </Files>
     <DebugOptions>
       <DebugTool>Simulator</DebugTool>
@@ -107,7 +107,6 @@
           <Path>DefaultBuild\function_test.obj</Path>
           <Path>DefaultBuild\interrupt.obj</Path>
           <Path>DefaultBuild\sci.obj</Path>
-          <Path>DefaultBuild\sensor.obj</Path>
           <Path>DefaultBuild\drive.obj</Path>
           <Path>DefaultBuild\switch.obj</Path>
           <Path>DefaultBuild\buzzer.obj</Path>
@@ -116,6 +115,7 @@
           <Path>DefaultBuild\run.obj</Path>
           <Path>DefaultBuild\output.obj</Path>
           <Path>DefaultBuild\camera.obj</Path>
+          <Path>DefaultBuild\trace.obj</Path>
         </LinkOrder>
         <CommonOptions>
           <IncludePathForC>.</IncludePathForC>

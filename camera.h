@@ -2,7 +2,7 @@
 #define CAMERA_H
 
 struct camera{
-	int sg;
+	int line_pos;
 	int mk_r;
 	int mk_l;
 	int stop;

@@ -16,33 +16,37 @@ void mode(int num){
 			camera_calib2();
 			break;
 		case 1:
-			line_scan2(10);
+			//general_control();
+			servo(1200, -2);
 			break;
 		case 2:
-			line_scan2(15);
+			//search_run();
+			servo(1200, -4);
 			break;
 		case 3:
-			line_scan2(20);
+			//shortcut_run(20,1);
+			servo(1200, -6);
 			break;
 		case 4:
-			line_scan2(15);
-			goal++;
-			if(goal>500000)move=0;
+			//shortcut_run(40,1);
+			servo(1200, -8);
 			break;
 		case 5:
-			line_scan3(15);
+			//shortcut_run(50,2);
+			servo(1200, -10);
 			break;
 		case 6:
-			line_scan3(20);
+			servo(1200, -12);
 			break;
 		case 7:
-
+			servo(1200, -14);
 			break;
 		case 8:
-
+			servo(1200, -18);
 			break;
 		case 9:
-			sci_printf("enc l:%d r:%d \r\n",l_encoder(),r_encoder());
+			servo(1200, -22);
+			//sci_printf("l:%d r:%d \r\n",L_ENC,R_ENC);
 			break;
 	}
 }

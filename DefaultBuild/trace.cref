@@ -1,6 +1,6 @@
 ****trace.c
 v2 
-:1561462211
+:1566653414
 #1
 F "_builtin_max" - I!1 T!2 ?24-2 P!3 P!4 
 T "long" KBS I!2 0x4 
@@ -122,11 +122,72 @@ V "" - I!117 O!115 T!9 .4 0x4
 F "__bset" - I!118 T!14 ?72-2 P!119 P!120 
 V "" - I!119 O!118 T!113 .4 0x4 
 V "" - I!120 O!118 T!9 .4 0x4 
+F "get_turn_amount" - I!121 T!122 #5-1 !5,11-1-1 ?4-4 35-1 50-1 P!165 P!166 
+T "int" KBS I!122 0x4 
+F "general_control" - I!125 T!14 #13-1 !13,28-1-1 ?5-4 
+F "search_run" A I!126 T!122 #30-1 !30,43-1-1 ?6-4 
+F "shortcut_run" - I!127 T!122 #45-1 !45,58-1-1 ?7-4 20-1 24-1 P!174 P!175 
+T "camera" KS I!130 !4-5 0x10 VM!131 VM!132 VM!133 VM!134 
+V "line_pos" - I!131 O!130 T!122 !5-5 35-1 50-1 .4 0x4 BO0 BIS32 
+V "mk_r" - I!132 O!130 T!122 !6-5 .4 0x4 BO32 BIS32 
+V "mk_l" - I!133 O!130 T!122 !7-5 .4 0x4 BO64 BIS32 
+V "stop" - I!134 O!130 T!122 !8-5 .4 0x4 BO96 BIS32 
+F "line_scan" - I!135 T!14 ?11-5 
+F "init_cam" - I!136 T!14 ?12-5 
+F "camera_calib" - I!137 T!14 ?13-5 
+V "cam_data" G I!138 T!130 ?15-5 35-1 50-1 .4 0x10 
+V "cam" G I!139 T!140 ?16-5 .4 0x200 
+T "" KA128 I!140 T!122 0x200 
+V "bin_cam" G I!141 T!142 ?17-5 .2 0x100 
+T "" KA128 I!142 T!31 0x100 
+V "ref_cam" G I!143 T!144 ?18-5 .4 0x200 
+T "" KA128 I!144 T!122 0x200 
+F "servo" - I!145 T!14 ?4-6 36-1 51-1 P!146 P!147 
+V "" - I!146 O!145 T!122 .4 0x4 
+V "" - I!147 O!145 T!122 .4 0x4 
+F "servo_backup" - I!148 T!14 ?5-6 P!149 P!150 
+V "" - I!149 O!148 T!122 .4 0x4 
+V "" - I!150 O!148 T!122 .4 0x4 
+F "l_encoder" - I!151 T!14 ?6-6 
+F "r_encoder" - I!152 T!14 ?7-6 
+V "move" G I!153 T!31 ?31-6 .2 0x2 
+V "last_dis" G I!154 T!122 ?32-6 .4 0x4 
+V "GA" G I!155 T!122 ?33-6 .4 0x4 
+V "distance" G I!156 T!122 ?36-6 .4 0x4 
+F "init_ENC" - I!157 T!14 ?38-6 
+F "get_enc" - I!158 T!159 ?39-6 P!160 
+T "unsigned int" KBU I!159 0x4 
+V "" - I!160 O!158 T!31 .2 0x2 
+V "l_enc" G I!161 T!122 ?40-6 .4 0x4 
+V "r_enc" G I!162 T!122 ?41-6 .4 0x4 
+V "line_pos" - I!165 O!121 T!122 !5-1 8-1 .4 0x4 
+V "target_pos" - I!166 O!121 T!122 !5-1 8-1 .4 0x4 
+V "turn_amount" - I!167 O!121 T!122 !6-1 #8-1 10-1 .4 0x4 
+V "progress" S I!168 O!125 T!122 !14-1 #14-1 #17-1 #21-1 #25-1 15-1 19-1 23-1 .4 0x4 
+V "sccess_flg" S I!169 O!126 T!122 !31-1 #31-1 38-1 .4 0x4 
+V "turn_amount" - I!170 O!126 T!122 !32-1 #35-1 36-1 .4 0x4 
+F "line_scan2" - I!171 T!122 34-1 49-1 49-1 
+V "vel_mode" - I!174 O!127 T!122 !45-1 51-1 .4 0x4 
+V "sc_mode" - I!175 O!127 T!122 !45-1 .4 0x4 
+V "sccess_flg" S I!176 O!127 T!122 !46-1 #46-1 53-1 .4 0x4 
+V "turn_amount" - I!177 O!127 T!122 !47-1 #50-1 51-1 .4 0x4 
 ****%CxSystemPath%\include\builtin.h
 v2 
-:1561462211
+:1566653414
 #2
 ****%CxSystemPath%\include\macro.h
 v2 
-:1561462211
+:1566653414
 #3
+****trace.h
+v2 
+:1566653414
+#4
+****camera.h
+v2 
+:1566653414
+#5
+****run.h
+v2 
+:1566653414
+#6

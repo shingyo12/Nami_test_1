@@ -40,6 +40,7 @@ void main(void)
 	init_rx220();
 	init_calib();
 	init_cam();
+	init_ENC();
 	//flash_led();
 	//motor_drive_test();
 	//motor_drive_test();

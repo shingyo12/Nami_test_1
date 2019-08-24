@@ -9,8 +9,6 @@
 -input=DefaultBuild\function_test.obj
 -input=DefaultBuild\interrupt.obj
 -input=DefaultBuild\sci.obj
--input=DefaultBuild\sensor.obj
--input=DefaultBuild\drive.obj
 -input=DefaultBuild\switch.obj
 -input=DefaultBuild\buzzer.obj
 -input=DefaultBuild\mode.obj
