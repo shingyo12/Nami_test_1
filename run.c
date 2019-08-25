@@ -102,7 +102,7 @@ void servo(int vel, int w){
 	MOT_R_IN2 = 1;
 	MTU4.TGRA=pwm_r;
 	
-	sci_printf("vel:%d l_pwm:%d r_pwm:%d\r\n",vel,(int)pwm_l,(int)pwm_r);
+	//sci_printf("vel:%d l_pwm:%d r_pwm:%d\r\n",vel,(int)pwm_l,(int)pwm_r);
 }
 
 

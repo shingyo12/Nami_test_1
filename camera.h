@@ -17,6 +17,6 @@ extern int cam[128];
 extern short int bin_cam[128];
 extern int ref_cam[128];
 
-#define STD_CAM 1000
+#define STD_CAM 0
 
 #endif

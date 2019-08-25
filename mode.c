@@ -13,11 +13,11 @@ long int goal=0;
 void mode(int num){
 	switch(num){
 		case 0:
-			camera_calib2();
+			camera_calib();
 			break;
 		case 1:
 			//general_control();
-			servo(1200, -2);
+			line_scan();
 			break;
 		case 2:
 			//search_run();

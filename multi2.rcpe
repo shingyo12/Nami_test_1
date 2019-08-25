@@ -26,8 +26,6 @@
       <Path>interrupt.h</Path>
       <Path>sci.c</Path>
       <Path>sci.h</Path>
-      <Path>drive.c</Path>
-      <Path>drive.h</Path>
       <Path>define_mouse.h</Path>
       <Path>switch.c</Path>
       <Path>switch.h</Path>
@@ -107,7 +105,6 @@
           <Path>DefaultBuild\function_test.obj</Path>
           <Path>DefaultBuild\interrupt.obj</Path>
           <Path>DefaultBuild\sci.obj</Path>
-          <Path>DefaultBuild\drive.obj</Path>
           <Path>DefaultBuild\switch.obj</Path>
           <Path>DefaultBuild\buzzer.obj</Path>
           <Path>DefaultBuild\mode.obj</Path>
