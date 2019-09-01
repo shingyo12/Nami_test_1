@@ -2,10 +2,10 @@
 #include "camera.h"
 #include "run.h"
 
-int get_turn_amount(int line_pos, int target_pos){
+int get_turn_amount(int tmp_pos, int target_pos){
 	int turn_amount;
 	
-	turn_amount = 200*(line_pos-target_pos)/64;
+	turn_amount = 22*(target_pos-tmp_pos)/32;
 	
 	return turn_amount;
 }
@@ -31,9 +31,9 @@ int search_run(){
 	static int sccess_flg = 0;
 	int turn_amount;
 	
-	line_scan2();
-	turn_amount = (int)get_turn_amount(cam_data.line_pos,64);
-	servo(30,turn_amount);
+	line_scan();
+	turn_amount = get_turn_amount(cam_data.line,64);
+	servo(800,turn_amount);
 	//move=1;
 	if(sccess_flg == 1){
 		return 1;
@@ -46,8 +46,8 @@ int shortcut_run(int vel_mode, int sc_mode){
 	static int sccess_flg = 0;
 	int turn_amount;
 	
-	line_scan2();
-	turn_amount = (int)get_turn_amount(cam_data.line_pos,64);
+	line_scan();
+	turn_amount = (int)get_turn_amount(cam_data.line,64);
 	servo(vel_mode,turn_amount);
 	
 	if(sccess_flg == 1){

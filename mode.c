@@ -20,12 +20,12 @@ void mode(int num){
 			line_scan();
 			break;
 		case 2:
-			//search_run();
-			servo(1200, -4);
+			search_run();
+			//servo(1200, -4);
 			break;
 		case 3:
 			//shortcut_run(20,1);
-			servo(1200, -6);
+			servo(600, -6);
 			break;
 		case 4:
 			//shortcut_run(40,1);
