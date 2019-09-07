@@ -16,7 +16,6 @@
 #include "switch.h"
 #include "buzzer.h"
 #include "camera.h"
-#include "calib.h"
 #include "run.h"
 //#include "drive.h"
 
@@ -38,7 +37,6 @@ void abort(void);
 void main(void)
 {
 	init_rx220();
-	init_calib();
 	init_cam();
 	init_ENC();
 	//flash_led();

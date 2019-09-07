@@ -12,7 +12,6 @@
 -input=DefaultBuild\switch.obj
 -input=DefaultBuild\buzzer.obj
 -input=DefaultBuild\mode.obj
--input=DefaultBuild\calib.obj
 -input=DefaultBuild\run.obj
 -input=DefaultBuild\output.obj
 -input=DefaultBuild\camera.obj
