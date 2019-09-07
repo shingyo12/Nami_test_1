@@ -7,14 +7,16 @@
 #include "output.h"
 #include "camera.h"
 #include "run.h"
+#include "trace.h"
 
 #define CAM_CLB 300
-#define CAM_FRC 20
+#define CAM_FRC 50
 #define RK 0
 #define GAP 8
 #define NUM_DIF 10
 #define UP 10
 #define UND 0
+#define CAM_AVE 10
 
 int cam[128];
 int ref_cam[128];
@@ -22,7 +24,7 @@ short int bin_cam[128];
 short int pst_cam[128];
 int dif_cam[128];
 int up_cam[128],lw_cam[128];
-int h=0,stp_cnt=0;
+int h=0,mkr_cnt=0;
 short int clk = 0, rokou=0;
 int line_pos;
 int left_mkr;
@@ -41,12 +43,22 @@ long int lup_sum_cam,rup_sum_cam;
 long int llw_sum_cam,rlw_sum_cam;
 long int l_mkr_cam,r_mkr_cam;
 long int cross_cam;
+long int l_cam,r_cam;
+long int l_max_cam,r_max_cam;
+long int l_tmp_cam,r_tmp_cam;
+long int l_ave_cam,r_ave_cam;
+long int m_sum_cam;
+short int r_cnt;
+int ave_cam[128];
+int max_cam[128];
 
 void init_cam(){
 	short int i;
 	for(i=0;i<128;++i){
 		ref_cam[i]=STD_CAM;
 		pst_cam[i]=STD_CAM;
+		ave_cam[i]=0;
+		max_cam[i]=0;
 	}
 	line_pos = 68;
 	
@@ -60,6 +72,15 @@ void init_cam(){
 	
 	pst_line_pos = 64;
 	pst_line_cam = 0;
+	
+	mkr_cnt = 0;
+	
+	l_cam = r_cam = 0;
+	l_max_cam = r_max_cam =0;
+	m_sum_cam = 0;
+	
+	r_cnt = 0;
+	
 }
 
 void line_scan(){
@@ -72,7 +93,9 @@ void line_scan(){
 	static short int pst_cnt_mkr_r=0;
 	static long int sum_cam = 0;
 	int p_cam;
-	int l_cam,r_cam;
+	int k;
+	short int r_flg=0,l_flg=0;
+	//int l_cam,r_cam;
 	
 	//LED_1 = CHIP_LED_OFF;
 
@@ -102,7 +125,8 @@ void line_scan(){
 		//CAM_SI=0;
 		//CAM_CLK=0;
 		
-		if(sum_cam < cross_cam){			
+		if((sum_cam < cross_cam) && move == 1){	
+			//BUZZ_OUT = 0;
 			for(i=0;i<127-NUM_DIF;i++){
 				dif_cam[i]=cam[i+NUM_DIF]-cam[i];
 				//sci_printf("%d ",dif_cam[i]);
@@ -112,7 +136,7 @@ void line_scan(){
 			if(pst_line_cam <= dif_cam[pst_line_pos] ){
 				for(i=pst_line_pos-GAP;i<127-NUM_DIF;i++){
 					if(dif_cam[i-GAP]>UP && dif_cam[i]<UND){
-						sci_printf("-> ");
+						//sci_printf("-> ");
 						line_pos = i - GAP/2;
 						//sci_printf("pline1 %d ",pst_line_pos);
 						break;
@@ -121,25 +145,160 @@ void line_scan(){
 			}else{
 				for(i=pst_line_pos+GAP;i>GAP;i--){
 					if(dif_cam[i]>UP && dif_cam[i+GAP]<UND){
-						sci_printf("<- ");
+						//sci_printf("<- ");
 						line_pos = i - GAP/2;
 						//sci_printf("pine1 %d ",pst_line_pos);
 						break;
 					}
 				}
 			}
-			cam_data.line = line_pos;
-			pst_line_pos = line_pos;
+			//cam_data.line = line_pos;
+			//pst_line_pos = line_pos;
 			pst_line_cam = dif_cam[line_pos];
 			rokou=0;
 			
+			if(mkr_cnt > CAM_AVE*2){
+				if(mkr_cnt == CAM_AVE*2 +1){
+					l_ave_cam = l_max_cam + ((l_max_cam - l_cam/(CAM_AVE ))*1)/3;
+					r_ave_cam = r_max_cam + ((r_max_cam - r_cam/(CAM_AVE ))*1)/3;
+					for(i=0;i<128;++i){
+						ave_cam[i] = ave_cam[i]/(CAM_AVE);
+						//sci_printf("ave i:%d max:%d ave_cam:%d cam:%d  \r\n",i, max_cam[i],ave_cam[i],cam[i] );
+					}
+					//sci_printf("\r\n");
+					mkr_cnt++;
+				}else{
+					//maker
+					l_tmp_cam = r_tmp_cam = 0;
+					for(i=0;i<128;++i){
+						p_cam = cam[i]/10;
+						if(i<line_pos-35 ){
+						//if(i<20){
+							l_tmp_cam += p_cam;
+						}
+						if(i>line_pos+30 ){
+						//if(i>90){
+							r_tmp_cam += p_cam;
+						}
+						//l_tmp_cam = cam[line_pos-35];
+						//l_ave_cam = max_cam[line_pos-35] + (max_cam[line_pos-35] - ave_cam[line_pos-35])/2;
+						
+						//r_tmp_cam = cam[line_pos+40];
+						//r_ave_cam = max_cam[line_pos+40] + (max_cam[line_pos+40] - ave_cam[line_pos+40])/2;
+					}
+					if((r_tmp_cam > r_ave_cam) ){
+						LED_2 = CHIP_LED_ON;
+						for(k=0;k<6000;k++);
+						if((l_tmp_cam < l_ave_cam) && (r_tmp_cam > r_ave_cam) ){
+							//for(k=0;k<6000;k++);
+							//LED_2 = CHIP_LED_ON;
+							//BUZZ_OUT = 1;
+							tmp_r = 1;
+							r_cnt++;
+							if(r_cnt > 2){
+								//BUZZ_OUT = 1;
+								//cam_data.mk_r_cnt++;
+								//if((l_tmp_cam < l_ave_cam) && (r_tmp_cam > r_ave_cam) ){
+									if(l_flg == 0){
+										r_flg = 1;
+									}else{
+										r_flg = 0;
+									}
+								//}
+								//for(k=0;k<6000;k++);
+							}
+							//for(k=0;k<6000;k++);
+							//r_flg = 1;
+							//BUZZ_OUT = 0;
+						}else{
+							r_cnt=0;
+							r_flg = 0;
+							//BUZZ_OUT = 0;
+						}
+						//BUZZ_OUT = 0;
+						//tmp_r = 1;
+						
+					}else{
+						tmp_r = 0;
+						LED_2 = CHIP_LED_OFF;
+						r_cnt = 0;
+						r_flg = 0;
+					}
+					if((l_tmp_cam > l_ave_cam) ){
+						LED_1 = CHIP_LED_ON;
+						for(k=0;k<60000;k++);
+						if((r_tmp_cam < r_ave_cam) ){
+							//LED_1 = CHIP_LED_ON;
+							tmp_l = 1;
+						}
+						//BUZZ_OUT = 1;
+						//tmp_l = 1;
+						r_cnt = 0;
+						r_flg = 0;
+						l_flg = 1;
+					}else{
+						tmp_l = 0;
+						LED_1 = CHIP_LED_OFF;
+						l_flg = 0;
+					}
+					
+					if(tmp_l == 0 && tmp_r == 0){
+						BUZZ_OUT = 0;
+					}
+					
+					if(r_flg==1){
+						BUZZ_OUT = 1;
+						cam_data.mk_r_cnt++;
+						if(cam_data.mk_r_cnt<2){
+							for(k=0;k<30000;k++);
+						}
+						//BUZZ_OUT = 0;
+						
+					}else{
+						BUZZ_OUT = 0;
+					}
+					//sci_printf("l:%d %d r:%d %d \r\n",l_tmp_cam, l_ave_cam ,r_tmp_cam ,r_ave_cam );
+				}
+			}else if(mkr_cnt > CAM_AVE){
+				mkr_cnt++;
+				lup_sum_cam = rup_sum_cam = 0;
+				for(i=0;i<128;++i){
+					p_cam = cam[i]/10;
+					//if(i<20){
+					if(i<line_pos-35 ){
+						l_cam += p_cam;
+						lup_sum_cam += p_cam;
+					}
+					//if(i>90){
+					if(i>line_pos+30 ){
+						r_cam += p_cam;
+						rup_sum_cam += p_cam;
+					}
+					
+					//ave
+					ave_cam[i] += p_cam;
+					if(max_cam[i]<p_cam){
+						max_cam[i] = p_cam;
+					}
+				}
+				if(l_max_cam < lup_sum_cam){
+					l_max_cam = lup_sum_cam;
+				}
+				if(r_max_cam < rup_sum_cam){
+					r_max_cam = rup_sum_cam;
+				}
+			}else{
+				mkr_cnt++;
+				sci_printf("%d \r\n",mkr_cnt);
+			}
+			
 			//maker
-			for(i=0;i<128;++i){
+			/*for(i=0;i<128;++i){
 				p_cam = cam[i]/10;
-				if(i<44){
+				if(i<24){
 					l_cam += p_cam;
 				}
-				if(i>80){
+				if(i>100){
 					r_cam += p_cam;
 				}
 			}
@@ -164,6 +323,8 @@ void line_scan(){
 			if(tmp_l == 0 && tmp_r == 0){
 				BUZZ_OUT = 0;
 			}
+			*/
+			
 			//marker
 			/*for(i=line_pos-18; i>5 ; i--){
 				if(cam[i] > ref_cam[i]){
@@ -217,7 +378,12 @@ void line_scan(){
 			pst_cnt_mkr_l = cnt_mkr_l;
 			pst_cnt_mkr_r = cnt_mkr_r;
 			*/
+		}else{
+			//BUZZ_OUT = 1;
+			line_pos = 64;
 		}
+		cam_data.line = line_pos;
+		pst_line_pos = line_pos;
 	}
 	
 	//sci_printf("camera move:%d sg:%d str:%d spd:%d \r\n",move,cam_data.sg,str,spd);
@@ -259,7 +425,7 @@ void camera_calib(){
 				}else{
 					//ref_cam[i]=ref_cam[i]+cam[i];
 					if(up_cam[i]<cam[i]) up_cam[i]=cam[i];
-					if(lw_cam[i]>cam[i])lw_cam[i]=cam[i];
+					if(lw_cam[i]>cam[i]) lw_cam[i]=cam[i];
 				}
 			}
 
@@ -281,21 +447,26 @@ void camera_calib(){
 				for(i=0;i<128;++i){
 					up_sum_cam += up_cam[i]/10;
 					lw_sum_cam += lw_cam[i]/10;
-					if(i<44){
+					if(i<24){
 						lup_sum_cam += up_cam[i]/10;
 						llw_sum_cam += lw_cam[i]/10;
+						//m_sum_cam += lw_cam[i]/10;
 					}
-					if(i>80){
+					if(i>100){
 						rup_sum_cam += up_cam[i]/10;
 						rlw_sum_cam += lw_cam[i]/10;
+						//m_sum_cam += lw_cam[i]/10;
+					}
+					else{
+						//m_sum_cam += up_cam[i]/10;
 					}
 					//sci_printf(" %d", cam[i]);
 				}
 				
 				//making slesh hold for maker
-				l_mkr_cam = llw_sum_cam + ((lup_sum_cam - llw_sum_cam)*4)/5;
-				r_mkr_cam = rlw_sum_cam + ((rup_sum_cam - rlw_sum_cam)*4)/5;
-				cross_cam = lw_sum_cam + ((up_sum_cam - lw_sum_cam)*2)/3;  
+				l_mkr_cam = llw_sum_cam + ((lup_sum_cam - llw_sum_cam)*1)/3;
+				r_mkr_cam = rlw_sum_cam + ((rup_sum_cam - rlw_sum_cam)*1)/3;
+				cross_cam = up_sum_cam - ((up_sum_cam - lw_sum_cam)*1)/5;  
 				
 				sci_printf("sum : %d  up : %d %d  lw : %d %d\r\n",cross_cam,lup_sum_cam,rup_sum_cam,llw_sum_cam,rlw_sum_cam);
 			}

@@ -17,19 +17,19 @@ void mode(int num){
 			break;
 		case 1:
 			//general_control();
-			line_scan();
+			search_run(600);
 			break;
 		case 2:
-			search_run();
+			search_run(400);
 			//servo(1200, -4);
 			break;
 		case 3:
 			//shortcut_run(20,1);
-			servo(600, -6);
+			search_run(800);
 			break;
 		case 4:
 			//shortcut_run(40,1);
-			servo(1200, -8);
+			search_run(1000);
 			break;
 		case 5:
 			//shortcut_run(50,2);

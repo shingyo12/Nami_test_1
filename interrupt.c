@@ -21,13 +21,13 @@ void mtu3_tgra(){
 	if(SW_MODE==SW_ON){
 		BUZZ_OUT = 1;
 		LED_1 = CHIP_LED_ON;
-		LED_2 = CHIP_LED_ON;
+		//LED_2 = CHIP_LED_ON;
 		wait_sw_off();
 		j=j+1;
 		if(j>9)j=0;
 		BUZZ_OUT = 0;
 		LED_1 = CHIP_LED_OFF;
-		LED_2 = CHIP_LED_OFF;
+		//LED_2 = CHIP_LED_OFF;
 	}
 	mode(j);
 	seven_seg(j);

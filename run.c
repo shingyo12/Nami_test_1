@@ -7,6 +7,11 @@
 //#include "drive.h"
 #include "camera.h"
 
+#include "sensor.h"
+#include "sci.h"
+#include "output.h"
+
+
 //int r_enc_dif = 0;
 //int l_enc_dif = 0;
 int velocity = 0;
